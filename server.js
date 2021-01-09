@@ -10,26 +10,21 @@ app.use(cors());
 const getApiUrl = ticker =>
   `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&outputsize=compact&apikey=${process.env.ALPHA_VANTAGE_KEY}`;
 
-console.log(getApiUrl("JKS"));
 app.get("/", (req, res) => {
-  res.send("go to /weather to see weather");
+  res.send("API ready for service");
 });
 
 app.get("/stocks/:ticker", (req, res) => {
-  console.log(req.params.ticker);
   console.log("I am getting hit");
-  res.json("Hallo");
-  axios.get(getApiUrl(req.params.ticker));
-
-  res.json();
-  // axios
-  //   .get(api)
-  //   .then(response => {
-  //     res.json(response.data);
-  //   })
-  //   .catch(error => {
-  //     console.log(error);
-  //   });
+  axios
+    .get(getApiUrl(req.params.ticker))
+    .then(response => {
+      res.json(response.data);
+    })
+    .catch(error => {
+      console.error(error.message);
+      res.status(500).send("Server error");
+    });
 });
 
 const PORT = process.env.PORT || 4000;
