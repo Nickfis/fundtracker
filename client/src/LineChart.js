@@ -5,16 +5,12 @@ import "./index.css";
 const LineChart = props => {
   const {data, width, height} = props;
 
-  console.log(`width: ${width}`);
-  console.log(`height: ${height}`);
   useEffect(() => {
     drawChart();
   }, [data]);
 
-  console.log(data);
-
   const drawChart = () => {
-    if (!props.data["PLTR"]) {
+    if (props.data === {}) {
       return null;
     }
     // data processing
