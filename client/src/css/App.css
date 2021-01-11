@@ -15,3 +15,13 @@
   display: flex;
   flex-direction: row;
 }
+
+.topHeading {
+  margin-bottom: 1rem;
+}
+
+.subHeader {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}

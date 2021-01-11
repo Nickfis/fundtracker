@@ -5,8 +5,8 @@ import "./css/Dashboard.css";
 const Dashboard = ({data}) => {
   return (
     <div className="dashboard">
-      <h1>Was geht ab</h1>
-      <h2>Quick Stats</h2>
+      <h1 className="topHeading">Road to 2Maloti Fund 2021</h1>
+      <h2 className="subHeader">Quick Stats</h2>
       <div className="quickStatsContainer">
         <div className="quickStat">
           <h3 className="quickStatHeadline">Portfolio Return</h3>
@@ -16,7 +16,7 @@ const Dashboard = ({data}) => {
         <div className="quickStat"></div>
         <div className="quickStat"></div>
       </div>
-      <LineChart data={data} width={800} height={500} />
+      <LineChart data={data} width={900} height={500} />
     </div>
   );
 };

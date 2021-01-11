@@ -3,6 +3,7 @@ import axios from "axios";
 import React, {useState, useEffect} from "react";
 import Dashboard from "./Dashboard";
 import NavBar from "./NavBar";
+import Ranking from "./Ranking";
 import * as d3 from "d3";
 
 const startOf2021 = {
@@ -115,6 +116,7 @@ const App = () => {
     <div className="App">
       <NavBar />
       <Dashboard data={stockData} />
+      <Ranking />
     </div>
   );
 };

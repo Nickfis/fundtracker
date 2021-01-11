@@ -1,13 +1,15 @@
 .navbar {
   height: 100vh;
-  width: 12vw;
+  width: 10vw;
   border: 1px solid #E2E7EE;
   display: block;
+  padding-top: 2.3rem;
 }
 
 .navigation {
   height: 100%;
   padding: 2.5rem;
+  padding-top: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
