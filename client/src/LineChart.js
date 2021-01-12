@@ -2,6 +2,8 @@ import React, {useEffect} from "react";
 import * as d3 from "d3";
 import "./index.css";
 
+// .tickFormat(5, "+");
+
 const LineChart = props => {
   const {data, width, height} = props;
 
@@ -10,14 +12,11 @@ const LineChart = props => {
   }, [data]);
 
   const drawChart = () => {
-    if (props.data === {}) {
-      return null;
-    }
     // data processing
     const allValues = [];
     const allDates = [];
     Object.keys(data).forEach(ticker => {
-      allValues.push(data[ticker].map(d => d.value));
+      allValues.push(data[ticker].map(d => d.roi));
       allDates.push(data[ticker].map(d => d.date));
     });
 
@@ -31,7 +30,7 @@ const LineChart = props => {
 
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(allValues.flat(), d => d)])
+      .domain([0.8, d3.max(allValues.flat(), d => d)])
       .range([height - padding.bottom - padding.top, 0]);
 
     const svg = d3
@@ -42,16 +41,21 @@ const LineChart = props => {
       .append("g")
       .attr("transform", `translate(${padding.left}, ${padding.top})`);
 
-    // call axis
+    // call x axis
     svg
       .append("g")
       .attr(
         "transform",
         `translate(0, ${height - padding.bottom - padding.top})`
       )
-      .call(d3.axisBottom(x));
+      .style("font", "13px times")
+      .call(d3.axisBottom(x).ticks(5));
 
-    svg.append("g").call(d3.axisLeft(y));
+    // y axis
+    svg
+      .append("g")
+      .style("font", "13px times")
+      .call(d3.axisLeft(y).ticks(5));
 
     // create color object
     const colourScheme = {
@@ -72,7 +76,7 @@ const LineChart = props => {
           d3
             .line()
             .x(d => x(d.date))
-            .y(d => y(d.value))
+            .y(d => y(d.roi))
         );
     });
   };
