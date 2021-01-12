@@ -1,7 +1,7 @@
 .dashboard {
   height: 100vh;
   width: 70vw;
-  padding: 2rem 2rem 0rem 3.3rem;
+  padding: 2rem 2rem 0rem 4.5rem;
   background-color: #e8eaee;
 }
 
@@ -20,8 +20,27 @@
   background-color: #FFFFFF;
   margin: 0 1rem;
   border-radius: 25px;
+  box-shadow: 2px 3px 3px rgba(0,0,0,.15);
+}
+
+.quickStatHeadline {
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.quickStatNumber {
+  font-size: 1.8rem;
 }
 
 .quickStat:first-child {
   margin-left: 0;
+}
+
+.worstPerformer {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.bestPerformer {
+  background-color: rgba(0, 255, 0, .5);
 }
