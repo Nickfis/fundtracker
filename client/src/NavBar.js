@@ -11,19 +11,27 @@ const NavBar = () => {
     <nav className="navbar">
       <ul className="navigation">
         <li className="navigation-item">
-          <img src={vulcan} className="navigation-picture" />
+          <img
+            src={vulcan}
+            alt="vulcan energy"
+            className="navigation-picture"
+          />
         </li>
         <li className="navigation-item">
-          <img src={nel} className="navigation-picture" />
+          <img src={nel} alt="nel asa" className="navigation-picture" />
         </li>
         <li className="navigation-item">
-          <img src={nio} className="navigation-picture" />
+          <img src={nio} alt="NIO" className="navigation-picture" />
         </li>
         <li className="navigation-item">
-          <img src={pltr} className="navigation-picture" />
+          <img src={pltr} alt="Palantir" className="navigation-picture" />
         </li>
         <li className="navigation-item">
-          <img src={virgin} className="navigation-picture" />
+          <img
+            src={virgin}
+            alt="Virgin Galactic"
+            className="navigation-picture"
+          />
         </li>
       </ul>
     </nav>

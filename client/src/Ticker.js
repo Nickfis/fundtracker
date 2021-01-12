@@ -5,7 +5,7 @@ const Ticker = ({tickerLogo, roi, user}) => {
   return (
     <div className="ticker">
       <div className="tickerAndUser">
-        <img className="rankingLogo" src={tickerLogo} />
+        <img className="rankingLogo" src={tickerLogo} alt="Ticker logo" />
         <h4 className="user">{user}</h4>
       </div>
       <h4 className="roi">{roi}%</h4>

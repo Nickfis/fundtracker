@@ -13,8 +13,9 @@ const Ranking = ({data}) => {
       <h2 className="rankingsHeadline">Current Returns</h2>
       <Ticker tickerLogo={nio} user={"Sam"} roi={30} />
       <Ticker tickerLogo={pltr} user={"Sam"} roi={30} />
-      <Ticker tickerLogo={pltr} user={"Sam"} roi={30} />
-      <Ticker tickerLogo={pltr} user={"Sam"} roi={30} />
+      <Ticker tickerLogo={vulcan} user={"Sam"} roi={30} />
+      <Ticker tickerLogo={virgin} user={"Sam"} roi={30} />
+      <Ticker tickerLogo={nel} user={"Sam"} roi={30} />
     </div>
   );
 };
