@@ -9,7 +9,7 @@ import * as d3 from "d3";
 const startOf2021 = {
   PLTR: 23.55,
   VulcanEnergy: 2.23,
-  NelAsa: 3.41,
+  NelAsa: 2.851, // IN EURO
   NIO: 48.74,
   SPCE: 23.73
 };
@@ -32,14 +32,16 @@ const App = () => {
 
   useEffect(() => {
     Promise.all([
-      axios.get(`stocks/PLTR`),
-      axios.get(`stocks/NIO`),
-      axios.get(`stocks/SPCE`)
-    ]).then(([dataPLTR, dataNIO, dataSPCE]) => {
+      axios.get(`yahoo/PLTR`),
+      axios.get(`yahoo/NIO`),
+      axios.get(`yahoo/SPCE`),
+      axios.get("yahoo/D7G.F")
+    ]).then(([dataPLTR, dataNIO, dataSPCE, dataNEL]) => {
       setStockData({
-        PLTR: filterDates(dataPLTR.data["Time Series (Daily)"], "PLTR"),
-        NIO: filterDates(dataNIO.data["Time Series (Daily)"], "NIO"),
-        SPCE: filterDates(dataSPCE.data["Time Series (Daily)"], "SPCE")
+        PLTR: dataPLTR.data.map(d => [d3.timeParse("%Y-%m-%d")(d[0]), d[1]]),
+        NIO: dataNIO.data.map(d => [d3.timeParse("%Y-%m-%d")(d[0]), d[1]]),
+        SPCE: dataSPCE.data.map(d => [d3.timeParse("%Y-%m-%d")(d[0]), d[1]]),
+        NEL: dataNEL.data.map(d => [d3.timeParse("%Y-%m-%d")(d[0]), d[1]])
       });
     });
   }, []);

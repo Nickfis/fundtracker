@@ -3,8 +3,9 @@ const cors = require("cors");
 const app = express();
 const axios = require("axios");
 const dotenv = require("dotenv");
+var yahooFinance = require("yahoo-finance");
+
 dotenv.config();
-// const api = `http://api.openweathermap.org/data/2.5/weather?q=london,uk&APPID=${process.env.REACT_APP_WEATHER_API_KEY}`;
 app.use(cors());
 
 const getApiUrl = ticker =>
@@ -14,17 +15,34 @@ app.get("/", (req, res) => {
   res.send("API ready for service");
 });
 
-app.get("/stocks/:ticker", (req, res) => {
-  console.log("I am getting hit");
-  axios
-    .get(getApiUrl(req.params.ticker))
-    .then(response => {
-      res.json(response.data);
-    })
-    .catch(error => {
-      console.error(error.message);
-      res.status(500).send("Server error");
-    });
+// app.get("/stocks/:ticker", (req, res) => {
+//   axios
+//     .get(getApiUrl(req.params.ticker))
+//     .then(response => {
+//       res.json(response.data);
+//     })
+//     .catch(error => {
+//       console.error(error.message);
+//       res.status(500).send("Server error");
+//     });
+// });
+
+app.get("/yahoo/:ticker", (req, res) => {
+  yahooFinance.historical(
+    {
+      symbol: req.params.ticker,
+      from: "2021-01-01",
+      to: new Date(),
+      period: "d"
+    },
+    (err, quotes) => {
+      let dailyData = [];
+      Object.keys(quotes).forEach(day => {
+        dailyData.push([quotes[day]["date"], quotes[day]["open"]]);
+      });
+      res.json(dailyData);
+    }
+  );
 });
 
 const PORT = process.env.PORT || 4000;
