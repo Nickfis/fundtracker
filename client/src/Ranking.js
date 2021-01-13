@@ -31,7 +31,7 @@ const Ranking = ({data}) => {
 
   return (
     <div className="ranking">
-      <h2 className="rankingsHeadline">Current Returns</h2>
+      <h2 className="rankingsHeadline">Individual Returns</h2>
       {returnArray
         .sort((a, b) => b[1] - a[1])
         .map(d => (

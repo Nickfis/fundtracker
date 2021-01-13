@@ -1,13 +1,16 @@
 .ranking {
   width: 20vw;
   padding: 1.5rem;
-  padding-top: 2.4rem;
+  padding-top: 5.5rem;
   box-shadow: -2px 0 3px rgba(0,0,0,0.15);
+  background-color: #525355;
 }
 
 .rankingsHeadline {
-  margin-bottom: 4.2rem;
+  margin-bottom: 1.2rem;
   font-weight: 400;
+  color: white;
+  text-align: center;
 }
 
 .ticker {

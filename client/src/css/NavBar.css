@@ -1,17 +1,17 @@
 .navbar {
   height: 100vh;
-  width: 10vw;
-  border: 1px solid #E2E7EE;
+  width: 12vw;
+  /* border: 1px solid #E2E7EE; */
   display: block;
   padding-top: 2.3rem;
-  box-shadow: 2px 0 3px rgba(0,0,0,0.15);
+  background-color: white;
   z-index: 1;
 }
 
 .navigation {
-  height: 100%;
-  padding: 2.5rem;
-  padding-top: 0;
+  margin-top: 30vh;
+  padding: 0;
+  padding-left: 2rem;
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -21,4 +21,5 @@
 
 .navigation-picture {
   width: 100%;
+  margin-bottom: 2rem;
 }

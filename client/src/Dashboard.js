@@ -35,7 +35,6 @@ const Dashboard = ({data, colourScheme}) => {
   return (
     <div className="dashboard">
       <h1 className="topHeading">Road to 2Maloti Fund 2021</h1>
-      <h2 className="subHeader">Quick Stats</h2>
       <div className="quickStatsContainer">
         <div className="quickStat">
           <h3 className="quickStatHeadline">Portfolio $ Value</h3>
