@@ -3,11 +3,14 @@ import LineChart from "./LineChart";
 import "./css/Dashboard.css";
 
 const Dashboard = ({data}) => {
+  console.log(data);
   // get latest return on investment
   const returnDictionary = {};
   Object.keys(data).forEach(ticker => {
-    returnDictionary[ticker] = data[ticker][0]["roi"];
+    returnDictionary[ticker] = data[ticker][0][1];
   });
+
+  console.log(returnDictionary);
 
   // calculate sum and average roi
   let sumROI = 0;
