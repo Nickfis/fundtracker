@@ -16,9 +16,11 @@ const LineChart = props => {
     const allValues = [];
     const allDates = [];
     Object.keys(data).forEach(ticker => {
-      allValues.push(data[ticker].map(d => d.roi));
-      allDates.push(data[ticker].map(d => d.date));
+      allValues.push(data[ticker].map(d => d[1]));
+      allDates.push(data[ticker].map(d => d[0]));
     });
+
+    console.log(allValues.flat());
 
     const padding = {top: 30, right: 30, bottom: 30, left: 30};
     // for the domain of the x and y axis I will have to look at all values I have
@@ -61,7 +63,9 @@ const LineChart = props => {
     const colourScheme = {
       PLTR: "steelblue",
       NIO: "#004d1f",
-      SPCE: "#7d2408"
+      SPCE: "#7d2408",
+      NEL: "#82becb",
+      VUL: "#7465e3"
     };
 
     Object.keys(data).forEach(ticker => {
@@ -75,8 +79,8 @@ const LineChart = props => {
           "d",
           d3
             .line()
-            .x(d => x(d.date))
-            .y(d => y(d.roi))
+            .x(d => x(d[0]))
+            .y(d => y(d[1]))
         );
     });
   };

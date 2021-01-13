@@ -38,6 +38,7 @@ app.get("/yahoo/:ticker", (req, res) => {
     (err, quotes) => {
       let dailyData = [];
       Object.keys(quotes).forEach(day => {
+        console.log(quotes[day]["date"]);
         dailyData.push([quotes[day]["date"], quotes[day]["open"]]);
       });
       res.json(dailyData);

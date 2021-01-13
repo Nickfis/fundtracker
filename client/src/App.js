@@ -8,8 +8,8 @@ import * as d3 from "d3";
 
 const startOf2021 = {
   PLTR: 23.55,
-  VulcanEnergy: 2.23,
-  NelAsa: 2.851, // IN EURO
+  VUL: 1.71, // IN EURO
+  NEL: 2.851, // IN EURO
   NIO: 48.74,
   SPCE: 23.73
 };
@@ -35,17 +35,35 @@ const App = () => {
       axios.get(`yahoo/PLTR`),
       axios.get(`yahoo/NIO`),
       axios.get(`yahoo/SPCE`),
-      axios.get("yahoo/D7G.F")
-    ]).then(([dataPLTR, dataNIO, dataSPCE, dataNEL]) => {
+      axios.get("yahoo/D7G.F"),
+      axios.get("yahoo/6KO.F")
+    ]).then(([dataPLTR, dataNIO, dataSPCE, dataNEL, dataVUL]) => {
       setStockData({
-        PLTR: dataPLTR.data.map(d => [d3.timeParse("%Y-%m-%d")(d[0]), d[1]]),
-        NIO: dataNIO.data.map(d => [d3.timeParse("%Y-%m-%d")(d[0]), d[1]]),
-        SPCE: dataSPCE.data.map(d => [d3.timeParse("%Y-%m-%d")(d[0]), d[1]]),
-        NEL: dataNEL.data.map(d => [d3.timeParse("%Y-%m-%d")(d[0]), d[1]])
+        PLTR: dataPLTR.data.map(d => [
+          d3.timeParse("%Y-%m-%d")(d[0].split("T")[0]),
+          d[1] / startOf2021["PLTR"]
+        ]),
+        NIO: dataNIO.data.map(d => [
+          d3.timeParse("%Y-%m-%d")(d[0].split("T")[0]),
+          d[1] / startOf2021["NIO"]
+        ]),
+        SPCE: dataSPCE.data.map(d => [
+          d3.timeParse("%Y-%m-%d")(d[0].split("T")[0]),
+          d[1] / startOf2021["SPCE"]
+        ]),
+        NEL: dataNEL.data.map(d => [
+          d3.timeParse("%Y-%m-%d")(d[0].split("T")[0]),
+          d[1] / startOf2021["NEL"]
+        ]),
+        VUL: dataVUL.data.map(d => [
+          d3.timeParse("%Y-%m-%d")(d[0].split("T")[0]),
+          d[1] / startOf2021["VUL"]
+        ])
       });
     });
   }, []);
 
+  console.log(stockData);
   return (
     <div className="App">
       <NavBar />
