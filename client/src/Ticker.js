@@ -8,7 +8,7 @@ const Ticker = ({tickerLogo, roi, user}) => {
         <img className="rankingLogo" src={tickerLogo} alt="Ticker logo" />
         <h4 className="user">{user}</h4>
       </div>
-      <h4 className="roi">{roi}%</h4>
+      <h4 className="roi">{Math.round((roi - 1) * 100)}%</h4>
     </div>
   );
 };

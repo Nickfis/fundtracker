@@ -4,9 +4,7 @@ import "./index.css";
 
 // .tickFormat(5, "+");
 
-const LineChart = props => {
-  const {data, width, height} = props;
-
+const LineChart = ({data, width, height, colourScheme}) => {
   useEffect(() => {
     drawChart();
   }, [data]);
@@ -19,8 +17,6 @@ const LineChart = props => {
       allValues.push(data[ticker].map(d => d[1]));
       allDates.push(data[ticker].map(d => d[0]));
     });
-
-    console.log(allValues.flat());
 
     const padding = {top: 30, right: 30, bottom: 30, left: 30};
     // for the domain of the x and y axis I will have to look at all values I have
@@ -50,23 +46,14 @@ const LineChart = props => {
         "transform",
         `translate(0, ${height - padding.bottom - padding.top})`
       )
-      .style("font", "13px times")
+      .style("font", "14px times")
       .call(d3.axisBottom(x).ticks(5));
 
     // y axis
     svg
       .append("g")
-      .style("font", "13px times")
+      .style("font", "14px times")
       .call(d3.axisLeft(y).ticks(5));
-
-    // create color object
-    const colourScheme = {
-      PLTR: "steelblue",
-      NIO: "#004d1f",
-      SPCE: "#7d2408",
-      NEL: "#82becb",
-      VUL: "#7465e3"
-    };
 
     Object.keys(data).forEach(ticker => {
       svg

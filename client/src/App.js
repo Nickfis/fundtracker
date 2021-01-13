@@ -6,29 +6,25 @@ import NavBar from "./NavBar";
 import Ranking from "./Ranking";
 import * as d3 from "d3";
 
-const startOf2021 = {
-  PLTR: 23.55,
-  VUL: 1.71, // IN EURO
-  NEL: 2.851, // IN EURO
-  NIO: 48.74,
-  SPCE: 23.73
-};
-
-const filterDates = (data, ticker) => {
-  return Object.keys(data)
-    .filter(key => key > "2020-12-31")
-    .reduce((arr, key) => {
-      arr.push({
-        date: d3.timeParse("%Y-%m-%d")(key),
-        value: data[key]["1. open"],
-        roi: parseFloat(data[key]["1. open"]) / parseFloat(startOf2021[ticker])
-      });
-      return arr;
-    }, []);
-};
-
 const App = () => {
   const [stockData, setStockData] = useState([]);
+
+  const startOf2021 = {
+    PLTR: 23.55,
+    VUL: 1.71, // IN EURO
+    NEL: 2.851, // IN EURO
+    NIO: 48.74,
+    SPCE: 23.73
+  };
+
+  // create color object
+  const colourScheme = {
+    PLTR: "rgba(70,130,180, 1)",
+    NIO: "rgba(0, 77, 31, 1)",
+    SPCE: "rgba(125, 36, 8, 1)",
+    NEL: "rgba(130, 190, 203, 1)",
+    VUL: "rgba(116, 101, 227, 1)"
+  };
 
   useEffect(() => {
     Promise.all([
@@ -63,12 +59,13 @@ const App = () => {
     });
   }, []);
 
-  console.log(stockData);
   return (
     <div className="App">
       <NavBar />
-      {stockData.length === 0 ? null : <Dashboard data={stockData} />}
-      <Ranking />
+      {stockData.length === 0 ? null : (
+        <Dashboard data={stockData} colourScheme={colourScheme} />
+      )}
+      <Ranking data={stockData} colourScheme={colourScheme} />
     </div>
   );
 };

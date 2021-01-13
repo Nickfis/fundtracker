@@ -2,15 +2,12 @@ import React from "react";
 import LineChart from "./LineChart";
 import "./css/Dashboard.css";
 
-const Dashboard = ({data}) => {
-  console.log(data);
+const Dashboard = ({data, colourScheme}) => {
   // get latest return on investment
   const returnDictionary = {};
   Object.keys(data).forEach(ticker => {
     returnDictionary[ticker] = data[ticker][0][1];
   });
-
-  console.log(returnDictionary);
 
   // calculate sum and average roi
   let sumROI = 0;
@@ -61,7 +58,12 @@ const Dashboard = ({data}) => {
           </h2>
         </div>
       </div>
-      <LineChart data={data} width={900} height={500} />
+      <LineChart
+        data={data}
+        colourScheme={colourScheme}
+        width={900}
+        height={500}
+      />
     </div>
   );
 };
