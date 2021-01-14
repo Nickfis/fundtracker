@@ -61,19 +61,15 @@ const App = () => {
     });
   }, []);
 
-  console.log(stockToShow);
-  console.log(allSelected);
   return (
     <div className="App">
       <NavBar selectStock={selectStock} setSelectAll={setSelectAll} />
-      {stockData.length === 0 ? null : (
-        <Dashboard
-          data={stockData}
-          colourScheme={colourScheme}
-          stockToShow={stockToShow}
-          allSelected={allSelected}
-        />
-      )}
+      <Dashboard
+        data={stockData}
+        colourScheme={colourScheme}
+        stockToShow={stockToShow}
+        allSelected={allSelected}
+      />
       <Ranking data={stockData} colourScheme={colourScheme} />
     </div>
   );

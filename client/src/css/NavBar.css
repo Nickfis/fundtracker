@@ -9,14 +9,13 @@
 }
 
 .navigation {
-  margin-top: 30vh;
+  margin-top: 28vh;
   padding: 0;
   padding-left: 2rem;
   list-style: none;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-
 }
 
 .navigation-picture {

@@ -57,14 +57,16 @@ const Dashboard = ({data, colourScheme, stockToShow, allSelected}) => {
           </h2>
         </div>
       </div>
-      <LineChart
-        data={data}
-        colourScheme={colourScheme}
-        stockToShow={stockToShow}
-        allSelected={allSelected}
-        width={900}
-        height={500}
-      />
+      {data.length === 0 ? null : (
+        <LineChart
+          data={data}
+          colourScheme={colourScheme}
+          stockToShow={stockToShow}
+          allSelected={allSelected}
+          width={900}
+          height={500}
+        />
+      )}
     </div>
   );
 };
