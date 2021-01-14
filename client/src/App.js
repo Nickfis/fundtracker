@@ -1,6 +1,6 @@
 import "./css/App.css";
 import axios from "axios";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Dashboard from "./Dashboard";
 import NavBar from "./NavBar";
 import Ranking from "./Ranking";
@@ -27,6 +27,7 @@ const App = () => {
     NEL: "rgba(130, 190, 203, 1)",
     VUL: "rgba(116, 101, 227, 1)"
   };
+
 
   useEffect(() => {
     Promise.all([
@@ -61,21 +62,16 @@ const App = () => {
     });
   }, []);
 
-  return (
-    <div className="App">
-      <NavBar
-        selectStock={selectStock}
-        setSelectAll={setSelectAll}
-        stockToShow={stockToShow}
-      />
-      <Dashboard
-        data={stockData}
-        colourScheme={colourScheme}
-        stockToShow={stockToShow}
-        allSelected={allSelected}
-      />
-      <Ranking data={stockData} colourScheme={colourScheme} />
-    </div>
+  return ( <
+    div className = "App" >
+    <
+    NavBar selectStock = { selectStock } setSelectAll = { setSelectAll } stockToShow = { stockToShow }
+    /> <
+    Dashboard data = { stockData } colourScheme = { colourScheme } stockToShow = { stockToShow } allSelected = { allSelected }
+    /> <
+    Ranking data = { stockData } colourScheme = { colourScheme }
+    /> < /
+    div >
   );
 };
 

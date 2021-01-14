@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import * as d3 from "d3";
 import "./index.css";
 
@@ -16,6 +16,7 @@ const LineChart = ({
     drawChart();
   }, [data, stockToShow, allSelected]);
 
+  console.log(data);
   const drawChart = () => {
     d3.selectAll("path").remove();
     d3.selectAll("g").remove();
@@ -27,7 +28,7 @@ const LineChart = ({
       allDates.push(data[ticker].map(d => d[0]));
     });
 
-    const padding = {top: 30, right: 30, bottom: 30, left: 30};
+    const padding = { top: 30, right: 10, bottom: 30, left: 50 };
     // for the domain of the x and y axis I will have to look at all values I have
     // not specific to each stock and build a large array of all those values
     const x = d3
@@ -37,7 +38,7 @@ const LineChart = ({
 
     const y = d3
       .scaleLinear()
-      .domain([0.8, d3.max(allValues.flat(), d => d)])
+      .domain([.8, d3.max(allValues.flat(), d => d)])
       .range([height - padding.bottom - padding.top, 0]);
 
     const svg = d3
@@ -47,9 +48,6 @@ const LineChart = ({
       .attr("height", height)
       .append("g")
       .attr("transform", `translate(${padding.left}, ${padding.top})`);
-
-    console.log(svg);
-    svg.selectAll("path").remove();
 
     // call x axis
     svg
@@ -62,10 +60,16 @@ const LineChart = ({
       .call(d3.axisBottom(x).ticks(5));
 
     // y axis
+    var percentFormat = d3.format("%");
     svg
       .append("g")
       .style("font", "14px times")
-      .call(d3.axisLeft(y).ticks(5));
+      .call(
+        d3
+        .axisLeft(y)
+        .tickFormat(d => Math.round((d - 1) * 100) + "%")
+        .ticks(5)
+      );
 
     if (!allSelected) {
       svg
@@ -77,9 +81,9 @@ const LineChart = ({
         .attr(
           "d",
           d3
-            .line()
-            .x(d => x(d[0]))
-            .y(d => y(d[1]))
+          .line()
+          .x(d => x(d[0]))
+          .y(d => y(d[1]))
         );
     } else {
       Object.keys(data).forEach(ticker => {
@@ -92,14 +96,15 @@ const LineChart = ({
           .attr(
             "d",
             d3
-              .line()
-              .x(d => x(d[0]))
-              .y(d => y(d[1]))
+            .line()
+            .x(d => x(d[0]))
+            .y(d => y(d[1]))
           );
       });
     }
   };
-  return <svg id="linechart" height={height} width={width}></svg>;
+  return <svg id = "linechart"
+  height = { height } width = { width } > < /svg>;
 };
 
 export default LineChart;
