@@ -6,7 +6,7 @@ import nio from "./resources/nio.png";
 import pltr from "./resources/PLTR.png";
 import virgin from "./resources/virgin.png";
 
-const NavBar = ({selectStock, setSelectAll}) => {
+const NavBar = ({selectStock, setSelectAll, stockToShow}) => {
   const clickLogo = ticker => {
     selectStock(ticker);
     setSelectAll(false);
@@ -24,7 +24,9 @@ const NavBar = ({selectStock, setSelectAll}) => {
           <img
             src={vulcan}
             alt="vulcan energy"
-            className="navigation-picture"
+            className={`navigation-picture ${
+              stockToShow == "VUL" ? "addBorder" : ""
+            }`}
             onClick={() => clickLogo("VUL")}
           />
         </li>
@@ -32,7 +34,9 @@ const NavBar = ({selectStock, setSelectAll}) => {
           <img
             src={nel}
             alt="nel asa"
-            className="navigation-picture"
+            className={`navigation-picture ${
+              stockToShow == "NEL" ? "addBorder" : ""
+            }`}
             onClick={() => clickLogo("NEL")}
           />
         </li>
@@ -40,7 +44,9 @@ const NavBar = ({selectStock, setSelectAll}) => {
           <img
             src={nio}
             alt="NIO"
-            className="navigation-picture"
+            className={`navigation-picture ${
+              stockToShow == "NIO" ? "addBorder" : ""
+            }`}
             onClick={() => clickLogo("NIO")}
           />
         </li>
@@ -48,7 +54,9 @@ const NavBar = ({selectStock, setSelectAll}) => {
           <img
             src={pltr}
             alt="Palantir"
-            className="navigation-picture"
+            className={`navigation-picture ${
+              stockToShow == "PLTR" ? "addBorder" : ""
+            }`}
             onClick={() => clickLogo("PLTR")}
           />
         </li>
@@ -56,7 +64,9 @@ const NavBar = ({selectStock, setSelectAll}) => {
           <img
             src={virgin}
             alt="Virgin Galactic"
-            className="navigation-picture"
+            className={`navigation-picture ${
+              stockToShow == "SPCE" ? "addBorder" : ""
+            }`}
             onClick={() => clickLogo("SPCE")}
           />
         </li>

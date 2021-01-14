@@ -63,7 +63,11 @@ const App = () => {
 
   return (
     <div className="App">
-      <NavBar selectStock={selectStock} setSelectAll={setSelectAll} />
+      <NavBar
+        selectStock={selectStock}
+        setSelectAll={setSelectAll}
+        stockToShow={stockToShow}
+      />
       <Dashboard
         data={stockData}
         colourScheme={colourScheme}

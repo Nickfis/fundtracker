@@ -35,3 +35,7 @@
   color: white;
   font-size: 1.15rem;
 }
+
+.addBorder {
+  border-right: 3px solid rgb(70, 91, 181);
+}
