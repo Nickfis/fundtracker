@@ -18,6 +18,7 @@ const LineChart = ({
 
   const drawChart = () => {
     d3.selectAll("path").remove();
+    d3.selectAll("g").remove();
     // data processing
     const allValues = [];
     const allDates = [];
