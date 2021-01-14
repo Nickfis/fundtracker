@@ -4,12 +4,20 @@ import "./index.css";
 
 // .tickFormat(5, "+");
 
-const LineChart = ({data, width, height, colourScheme}) => {
+const LineChart = ({
+  data,
+  width,
+  height,
+  colourScheme,
+  stockToShow,
+  allSelected
+}) => {
   useEffect(() => {
     drawChart();
-  }, [data]);
+  }, [data, stockToShow, allSelected]);
 
   const drawChart = () => {
+    d3.selectAll("path").remove();
     // data processing
     const allValues = [];
     const allDates = [];
@@ -39,6 +47,9 @@ const LineChart = ({data, width, height, colourScheme}) => {
       .append("g")
       .attr("transform", `translate(${padding.left}, ${padding.top})`);
 
+    console.log(svg);
+    svg.selectAll("path").remove();
+
     // call x axis
     svg
       .append("g")
@@ -55,12 +66,12 @@ const LineChart = ({data, width, height, colourScheme}) => {
       .style("font", "14px times")
       .call(d3.axisLeft(y).ticks(5));
 
-    Object.keys(data).forEach(ticker => {
+    if (!allSelected) {
       svg
         .append("path")
-        .datum(data[ticker])
+        .datum(data[stockToShow])
         .attr("fill", "none")
-        .attr("stroke", colourScheme[ticker])
+        .attr("stroke", colourScheme[stockToShow])
         .attr("stroke-width", 3)
         .attr(
           "d",
@@ -69,7 +80,23 @@ const LineChart = ({data, width, height, colourScheme}) => {
             .x(d => x(d[0]))
             .y(d => y(d[1]))
         );
-    });
+    } else {
+      Object.keys(data).forEach(ticker => {
+        svg
+          .append("path")
+          .datum(data[ticker])
+          .attr("fill", "none")
+          .attr("stroke", colourScheme[ticker])
+          .attr("stroke-width", 3)
+          .attr(
+            "d",
+            d3
+              .line()
+              .x(d => x(d[0]))
+              .y(d => y(d[1]))
+          );
+      });
+    }
   };
   return <svg id="linechart" height={height} width={width}></svg>;
 };

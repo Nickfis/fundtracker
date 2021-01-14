@@ -2,7 +2,7 @@ import React from "react";
 import LineChart from "./LineChart";
 import "./css/Dashboard.css";
 
-const Dashboard = ({data, colourScheme}) => {
+const Dashboard = ({data, colourScheme, stockToShow, allSelected}) => {
   // get latest return on investment
   const returnDictionary = {};
   Object.keys(data).forEach(ticker => {
@@ -60,6 +60,8 @@ const Dashboard = ({data, colourScheme}) => {
       <LineChart
         data={data}
         colourScheme={colourScheme}
+        stockToShow={stockToShow}
+        allSelected={allSelected}
         width={900}
         height={500}
       />

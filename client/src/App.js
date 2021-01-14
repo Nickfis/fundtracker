@@ -8,6 +8,8 @@ import * as d3 from "d3";
 
 const App = () => {
   const [stockData, setStockData] = useState([]);
+  const [stockToShow, selectStock] = useState("");
+  const [allSelected, setSelectAll] = useState(true);
 
   const startOf2021 = {
     PLTR: 23.55,
@@ -59,11 +61,18 @@ const App = () => {
     });
   }, []);
 
+  console.log(stockToShow);
+  console.log(allSelected);
   return (
     <div className="App">
-      <NavBar />
+      <NavBar selectStock={selectStock} setSelectAll={setSelectAll} />
       {stockData.length === 0 ? null : (
-        <Dashboard data={stockData} colourScheme={colourScheme} />
+        <Dashboard
+          data={stockData}
+          colourScheme={colourScheme}
+          stockToShow={stockToShow}
+          allSelected={allSelected}
+        />
       )}
       <Ranking data={stockData} colourScheme={colourScheme} />
     </div>

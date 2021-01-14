@@ -35,7 +35,12 @@ const Ranking = ({data}) => {
       {returnArray
         .sort((a, b) => b[1] - a[1])
         .map(d => (
-          <Ticker tickerLogo={logo[d[0]]} user={investor[d[0]]} roi={d[1]} />
+          <Ticker
+            tickerLogo={logo[d[0]]}
+            user={investor[d[0]]}
+            roi={d[1]}
+            key={d[0]}
+          />
         ))}
     </div>
   );
