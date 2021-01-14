@@ -15,18 +15,6 @@ app.get("/", (req, res) => {
   res.send("API ready for service");
 });
 
-// app.get("/stocks/:ticker", (req, res) => {
-//   axios
-//     .get(getApiUrl(req.params.ticker))
-//     .then(response => {
-//       res.json(response.data);
-//     })
-//     .catch(error => {
-//       console.error(error.message);
-//       res.status(500).send("Server error");
-//     });
-// });
-
 app.get("/yahoo/:ticker", (req, res) => {
   yahooFinance.historical(
     {
@@ -48,5 +36,3 @@ app.get("/yahoo/:ticker", (req, res) => {
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, console.log(`App running on port ${PORT} `));
-
-console.log();
