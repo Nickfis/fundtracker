@@ -13,8 +13,15 @@ const Dashboard = ({data, colourScheme, stockToShow, allSelected}) => {
   let sumROI = 0;
   Object.keys(returnDictionary).forEach(ticker => {
     sumROI += returnDictionary[ticker];
+    if (ticker == "NIO") {
+      sumROI += returnDictionary[ticker];
+    }
   });
-  const avgROI = sumROI / Object.keys(data).length;
+  // due to beautify not understanding math I have to split this out.
+  // If you write avgROI = sumROI / (Object.kys(data).length + 1);
+  // beautify removes the parenthesis automatically.
+  const numberOfInvestors = Object.keys(data).length + 1;
+  const avgROI = sumROI / numberOfInvestors;
 
   // get best and worst performing stock
   let bestPerformer = [];
