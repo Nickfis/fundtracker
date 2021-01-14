@@ -6,10 +6,6 @@ var yahooFinance = require("yahoo-finance");
 const getApiUrl = ticker =>
   `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&outputsize=compact&apikey=${process.env.ALPHA_VANTAGE_KEY}`;
 
-app.get("/", (req, res) => {
-  res.send("API ready for service");
-});
-
 app.get("/yahoo/:ticker", (req, res) => {
   yahooFinance.historical(
     {
