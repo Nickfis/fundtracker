@@ -1,12 +1,7 @@
 const express = require("express");
-const cors = require("cors");
-const app = express();
-const axios = require("axios");
-const dotenv = require("dotenv");
-var yahooFinance = require("yahoo-finance");
 
-dotenv.config();
-app.use(cors());
+const app = express();
+var yahooFinance = require("yahoo-finance");
 
 const getApiUrl = ticker =>
   `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&outputsize=compact&apikey=${process.env.ALPHA_VANTAGE_KEY}`;
