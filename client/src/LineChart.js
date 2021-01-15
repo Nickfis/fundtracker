@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import * as d3 from "d3";
 import "./index.css";
 
 // .tickFormat(5, "+");
-
 const LineChart = ({
   data,
   width,
@@ -28,7 +27,7 @@ const LineChart = ({
       allDates.push(data[ticker].map(d => d[0]));
     });
 
-    const padding = { top: 30, right: 10, bottom: 30, left: 50 };
+    const padding = {top: 50, right: 20, bottom: 30, left: 50};
     // for the domain of the x and y axis I will have to look at all values I have
     // not specific to each stock and build a large array of all those values
     const x = d3
@@ -38,7 +37,10 @@ const LineChart = ({
 
     const y = d3
       .scaleLinear()
-      .domain([.8, d3.max(allValues.flat(), d => d)])
+      .domain([
+        d3.min([d3.min(allValues.flat(), d => d), 0.8]),
+        d3.max(allValues.flat(), d => d)
+      ])
       .range([height - padding.bottom - padding.top, 0]);
 
     const svg = d3
@@ -66,10 +68,73 @@ const LineChart = ({
       .style("font", "14px times")
       .call(
         d3
-        .axisLeft(y)
-        .tickFormat(d => Math.round((d - 1) * 100) + "%")
-        .ticks(5)
+          .axisLeft(y)
+          .tickFormat(d => Math.round((d - 1) * 100) + "%")
+          .ticks(5)
       );
+
+    var tooltip = svg
+      .append("g")
+      .attr("class", "focus")
+      .style("display", "none");
+
+    tooltip
+      .append("rect")
+      .attr("class", "tooltip")
+      .attr("width", 130)
+      .attr("height", 65)
+      .attr("x", 10)
+      .attr("y", -22)
+      .attr("rx", 4)
+      .attr("ry", 4)
+      .attr("fill", "rgb(215, 215, 215)")
+      .attr("stroke", "#000");
+
+    tooltip
+      .append("text")
+      .attr("class", "tooltipTicker")
+      .attr("x", 18)
+      .attr("y", -2);
+
+    tooltip
+      .append("text")
+      .attr("class", "tooltipDate")
+      .attr("x", 18)
+      .attr("y", 18);
+
+    tooltip
+      .append("text")
+      .attr("class", "tooltipValue")
+      .attr("x", 18)
+      .attr("y", 38);
+
+    const dateFormatter = d3.timeFormat("%d.%m.%y");
+
+    const onMouseover = (e, ticker) => {
+      console.log(e);
+      const currentDate = x.invert(e.layerX - padding.left);
+      const currentValue = y.invert(e.layerY - padding.top);
+      console.log(currentValue);
+      const xValue = e.layerX - 4 * padding.left;
+      const yValue = e.layerY - 3.5 * padding.bottom;
+
+      tooltip
+        .style("display", null)
+        .attr("transform", `translate(${xValue}, ${yValue})`);
+
+      tooltip
+        .select(".tooltipDate")
+        .text(d3.timeFormat("%d.%m.%Y")(currentDate));
+      tooltip
+        .select(".tooltipValue")
+        .text(`Return: ${Math.round(100 * (currentValue - 1))}%`);
+
+      tooltip.select(".tooltipTicker").text(`Ticker: ${ticker}`);
+    };
+
+    const onMouseout = () => {
+      tooltip.style("display", "none");
+    };
 
     if (!allSelected) {
       svg
@@ -81,10 +146,12 @@ const LineChart = ({
         .attr(
           "d",
           d3
-          .line()
-          .x(d => x(d[0]))
-          .y(d => y(d[1]))
-        );
+            .line()
+            .x(d => x(d[0]))
+            .y(d => y(d[1]))
+        )
+        .on("mouseover", e => onMouseover(e, stockToShow))
+        .on("mouseout", () => onMouseout());
     } else {
       Object.keys(data).forEach(ticker => {
         svg
@@ -96,15 +163,20 @@ const LineChart = ({
           .attr(
             "d",
             d3
-            .line()
-            .x(d => x(d[0]))
-            .y(d => y(d[1]))
-          );
+              .line()
+              .x(d => x(d[0]))
+              .y(d => y(d[1]))
+          )
+          .on("mouseover", e => onMouseover(e, ticker))
+          .on("mouseout", () => onMouseout());
       });
     }
   };
-  return <svg id = "linechart"
-  height = { height } width = { width } > < /svg>;
+  return (
+    <svg id="linechart" height={height} width={width}>
+      {" "}
+    </svg>
+  );
 };
 
 export default LineChart;
