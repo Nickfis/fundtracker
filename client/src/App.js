@@ -47,7 +47,7 @@ const App = () => {
         ]),
         SPCE: dataSPCE.data.map(d => [
           d3.timeParse("%Y-%m-%d")(d[0].split("T")[0]),
-          (d[1] / startOf2021["SPCE"]) * -1.5
+          d[1] / startOf2021["SPCE"]
         ]),
         NEL: dataNEL.data.map(d => [
           d3.timeParse("%Y-%m-%d")(d[0].split("T")[0]),
