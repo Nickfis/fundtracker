@@ -3,11 +3,9 @@ const express = require("express");
 const app = express();
 var yahooFinance = require("yahoo-finance");
 
-const getApiUrl = ticker =>
-  `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&outputsize=compact&apikey=${process.env.ALPHA_VANTAGE_KEY}`;
-
 app.get("/yahoo/:ticker", (req, res) => {
-  yahooFinance.historical({
+  yahooFinance.historical(
+    {
       symbol: req.params.ticker,
       from: "2021-01-01",
       to: new Date(),
