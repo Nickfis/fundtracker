@@ -6,26 +6,33 @@ import nio from "./resources/nio.png";
 import pltr from "./resources/PLTR.png";
 import virgin from "./resources/virgin.png";
 import vulcan from "./resources/vulcan.png";
+import jks from "./resources/jks.png";
+import ser from "./resources/ser.png";
+import zap from "./resources/zaptec.png";
+import daimler from "./resources/daimler.png";
+import limelight from "./resources/limelight.png";
 
-const Ranking = ({data}) => {
+const Ranking = ({ data }) => {
   const investor = {
-    PLTR: "Niklas",
-    VUL: "Maurice", // IN EURO
-    NEL: "Nino", // IN EURO
-    NIO: "Sam & Max",
-    SPCE: "Marcel"
+    PLTR: "Max",
+    JKS: "Niklas",
+    SER: "Maurice", // IN EURO
+    ZAP: "Nino", // IN EURO
+    DTK: "Steven",
+    LLNW: "Marcel",
   };
 
   const logo = {
     PLTR: pltr,
-    NIO: nio,
-    NEL: nel,
-    SPCE: virgin,
-    VUL: vulcan
+    JKS: jks,
+    SER: ser,
+    ZAP: zap,
+    DTK: daimler,
+    LLNW: limelight,
   };
   // have to get the latest roi
   let returnArray = [];
-  Object.keys(data).forEach(ticker => {
+  Object.keys(data).forEach((ticker) => {
     returnArray.push([ticker, data[ticker][0][1]]);
   });
 
@@ -34,7 +41,7 @@ const Ranking = ({data}) => {
       <h2 className="rankingsHeadline">Individual Returns</h2>
       {returnArray
         .sort((a, b) => b[1] - a[1])
-        .map(d => (
+        .map((d) => (
           <Ticker
             tickerLogo={logo[d[0]]}
             user={investor[d[0]]}

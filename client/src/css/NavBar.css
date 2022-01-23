@@ -21,7 +21,10 @@
 .navigation-picture {
   cursor: pointer;
   width: 100%;
-  margin-bottom: 2rem;
+}
+
+.navigation-picture--SER {
+  margin-top: 1rem;
 }
 
 .showAll {

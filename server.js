@@ -7,13 +7,13 @@ app.get("/yahoo/:ticker", (req, res) => {
   yahooFinance.historical(
     {
       symbol: req.params.ticker,
-      from: "2021-01-01",
+      from: "2022-01-01",
       to: new Date(),
-      period: "d"
+      period: "d",
     },
     (err, quotes) => {
       let dailyData = [];
-      Object.keys(quotes).forEach(day => {
+      Object.keys(quotes).forEach((day) => {
         dailyData.push([quotes[day]["date"], quotes[day]["open"]]);
       });
       res.json(dailyData);

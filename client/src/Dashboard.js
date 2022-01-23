@@ -2,16 +2,16 @@ import React from "react";
 import LineChart from "./LineChart";
 import "./css/Dashboard.css";
 
-const Dashboard = ({data, colourScheme, stockToShow, allSelected}) => {
+const Dashboard = ({ data, colourScheme, stockToShow, allSelected }) => {
   // get latest return on investment
   const returnDictionary = {};
-  Object.keys(data).forEach(ticker => {
+  Object.keys(data).forEach((ticker) => {
     returnDictionary[ticker] = data[ticker][0][1];
   });
 
   // calculate sum and average roi
   let sumROI = 0;
-  Object.keys(returnDictionary).forEach(ticker => {
+  Object.keys(returnDictionary).forEach((ticker) => {
     sumROI += returnDictionary[ticker];
     if (ticker == "NIO") {
       sumROI += returnDictionary[ticker];
@@ -26,7 +26,7 @@ const Dashboard = ({data, colourScheme, stockToShow, allSelected}) => {
   // get best and worst performing stock
   let bestPerformer = [];
   let worstPerformer = [];
-  Object.keys(returnDictionary).forEach(ticker => {
+  Object.keys(returnDictionary).forEach((ticker) => {
     if (bestPerformer.length === 0) {
       bestPerformer = [ticker, returnDictionary[ticker]];
       worstPerformer = [ticker, returnDictionary[ticker]];
@@ -41,7 +41,7 @@ const Dashboard = ({data, colourScheme, stockToShow, allSelected}) => {
 
   return (
     <div className="dashboard">
-      <h1 className="topHeading">Road to 2Maloti Fund 2021</h1>
+      <h1 className="topHeading">Road to 2 Maloti Fund 2022</h1>
       <div className="quickStatsContainer">
         <div className="quickStat">
           <h3 className="quickStatHeadline">Portfolio $ Value</h3>
